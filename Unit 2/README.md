@@ -33,6 +33,25 @@ Collection<E> keys()
 ```
 1. [Collection](https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html)
 
+Dictionaries are common features in modern programming languages. Unordered key-value mappings show up in Python:
+
+```python
+dictionary = {}
+
+dictionary["name"] = "Bob Smith"
+#            ^key       ^value
+
+```
+
+And in JavaScript:
+```javascript
+var object = {} //JavaScript's key-value stores are called objects
+
+object["name"] = "Bob Smith"
+//       ^key       ^value
+
+```
+
 #### Task 1
 
-Implement a Dictionary using array(s). 
+Implement a Dictionary using array(s).
