@@ -30,6 +30,9 @@ int size()
 //returns a Collection¹ of key-value pairs
 Collection<E> keys()
 
+//returns a Collection of values
+Collection<T>  values()
+
 ```
 1. [Collection](https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html)
 
