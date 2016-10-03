@@ -107,4 +107,18 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         if(n.getRight() == null) return n;
         return max(n.getRight());
     }
+
+    public String toString() {
+        String temp = toString(root);
+        temp = temp.substring(0, temp.length()-2);
+        return "{" + temp + "}";
+    }
+
+    private String toString(Node<Key, Value> n) {
+        if(n == null) return "";
+        return toString(n.getLeft()) +
+                n.getKey() + "=" + n.getValue()  + ", " +
+                toString(n.getRight());
+
+    }
 }
