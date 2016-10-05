@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Created by aclement on 9/26/16.
  */
@@ -108,6 +111,31 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
         return max(n.getRight());
     }
 
+    public Collection<Key> keys() {
+        ArrayList<Key> a = new ArrayList<>();
+        keys(a, root);
+        return a;
+    }
+
+    private void keys(ArrayList<Key> a, Node<Key, Value> n) {
+        if(n == null) return;
+        keys(a, n.getLeft());
+        a.add(n.getKey());
+        keys(a, n.getRight());
+    }
+
+    public Collection<Value> values() {
+        ArrayList<Value> a = new ArrayList<>();
+        values(a, root);
+        return a;
+    }
+    private void values(ArrayList<Value> a, Node<Key, Value> n) {
+        if(n == null) return;
+        values(a, n.getLeft());
+        a.add(n.getValue());
+        values(a, n.getRight());
+    }
+
     public String toString() {
         String temp = toString(root);
         temp = temp.substring(0, temp.length()-2);
@@ -121,4 +149,5 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
                 toString(n.getRight());
 
     }
+
 }
