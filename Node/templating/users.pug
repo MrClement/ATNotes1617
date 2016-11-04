@@ -1,0 +1,18 @@
+html
+  head
+    title #{title}
+  body
+    h3 Here is the list of users
+    ul
+      each user in users
+        li= user.name + ': ' + user.email
+
+    form(method='POST' action='/users')
+      div
+        label(for='name') Name: 
+        input(name='name' type='text' id="name")
+      div
+        label(for='email') Email:
+        input(name='email' type='text' id='email')
+      div
+        input(type='submit' id='submit')
