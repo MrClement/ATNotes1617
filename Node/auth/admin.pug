@@ -3,16 +3,9 @@ html
     title= title
     link(rel="stylesheet" type="text/css" href="style.css")
   body
-    h3 Bob
+    div= message
     div
-      ul
-        each user in users
-          li= user.name
-    div
-      form(method="POST" action="/users")
-        label(for="name") Name:
-        input(name="name" id="name" type="text")
-        br
+      form(method="POST" action="/admin")
         label(for="username") Username:
         input(name="username" id="username" type="username")
         br

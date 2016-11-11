@@ -17,6 +17,8 @@ mongoose.connect('mongodb://localhost/trashdb');
 
 const app = express();
 
+app.use(passport.initialize());
+
 app.use(parser.urlencoded({
   extended: false
 }));
@@ -43,13 +45,12 @@ app.get('/users', function(request, response) {
 });
 
 app.post('/users', function(req, res) {
-  User.create({
-      name: req.body.name,
-      password: req.body.password
-    },
-    function(err, user) {
-      res.redirect('/users');
-    });
+  User.register(new User({
+    name: req.body.name,
+    username: req.body.username
+  }), req.body.password, function(err, user) {
+    res.redirect('/users');
+  });
 });
 
 app.get('/change-oro', function(req, res) {
@@ -62,13 +63,41 @@ app.get('/change-oro', function(req, res) {
     })
 })
 
-app.get('/admin',
-  passport.authenticate('local', {
-    failureRedirect: "/users"
-  }),
-  function(req, res) {
+app.post('/admin', function(req, res) {
+  passport.authenticate('local')(req, res, function() {
     return res.send("Permission granted!");
   });
+});
+
+app.get('/admin', function(req, res) {
+  if (req.isAuthenticated()) {
+    res.render('admin', {
+      message: "You are an admin"
+    })
+  } else {
+    res.render('admin', {
+      message: "You are not an admin"
+    });
+  }
+});
+
+app.get('/api/users', function(req, res) {
+  User.find({})
+    .select('-_id -__v')
+    .exec(function(err, users) {
+      res.json(users);
+    });
+})
+
+app.get('/api/users/:username', function(req, res) {
+  User.findOne({
+      username: req.params.username
+    })
+    .select('-_id -__v')
+    .exec(function(err, user) {
+      res.json(user);
+    });
+})
 
 
 app.listen(3000);
