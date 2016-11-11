@@ -1,0 +1,19 @@
+html
+  head
+    title= title
+    link(rel="stylesheet" type="text/css" href="style.css")
+  body
+    h3 Bob
+    div
+      ul
+        each user in users
+          li= user.name
+    div
+      form(method="POST" action="/users")
+        label(for="name") Name:
+        input(name="name" id="name" type="text")
+        br
+        label(for="password") Password:
+        input(name="password" id="password" type="text")
+        br
+        input(type="Submit")
